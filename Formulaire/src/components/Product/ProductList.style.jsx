@@ -7,6 +7,7 @@ export const Container = styled.div`
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    box-shadow: 10px 2px 4px rgba(0, 0, 0, 0.1); 
 `;
 
 export const CheckboxContainer = styled.div`
