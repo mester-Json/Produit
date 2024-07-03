@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import FruitTable from '../Fruit/Fruit';
 import VegetableTable from '../Vege/Vege';
 import { Container, CheckboxContainer, SearchInput } from './ProductList.style';
 
-const ProductList = ({ products }) => {
+const ProductList = () => {
+    const [products, setProducts] = useState([]);
     const [hideOutOfStock, setHideOutOfStock] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get('http://localhost:3001/products');
+            setProducts(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des produits:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    useEffect(() => {
+        fetchProducts();
+    }, [hideOutOfStock, searchTerm]);
 
     const handleStockChange = (e) => {
         setHideOutOfStock(e.target.checked);
@@ -24,6 +43,9 @@ const ProductList = ({ products }) => {
         }
         return true;
     });
+
+    const fruitProducts = filteredProducts.filter(product => product.category === 'Fruits');
+    const vegetableProducts = filteredProducts.filter(product => product.category === 'Légumes');
 
     return (
         <Container>
@@ -44,8 +66,8 @@ const ProductList = ({ products }) => {
                 onChange={handleSearchChange}
             />
 
-            <FruitTable products={filteredProducts.filter(product => product.category === 'Fruits')} />
-            <VegetableTable products={filteredProducts.filter(product => product.category === 'Vegetables')} />
+            <FruitTable products={fruitProducts} />
+            <VegetableTable products={vegetableProducts} />
         </Container>
     );
 };
