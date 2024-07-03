@@ -16,6 +16,7 @@ function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ProductList products={products} />} />
+        <Route path='*' element={<h1> 418 Je Suis un cafetiére</h1>} />
       </Routes>
     </BrowserRouter>
   );
