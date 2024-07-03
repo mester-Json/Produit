@@ -14,7 +14,7 @@ export const CheckboxContainer = styled.div`
 `;
 
 export const SearchInput = styled.input`
-    width: 100%;
+    width: 80%;
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
