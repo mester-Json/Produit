@@ -15,13 +15,10 @@ const ProductList = ({ products }) => {
         setSearchTerm(e.target.value);
     };
 
-    // Filtrage des produits en fonction des critères
     const filteredProducts = products.filter(product => {
-        // Filtrage par stock disponible
         if (hideOutOfStock && product.number === 0) {
             return false;
         }
-        // Filtrage par recherche sur le nom du produit
         if (searchTerm !== '' && !product.name.toLowerCase().includes(searchTerm.toLowerCase())) {
             return false;
         }
